@@ -1,0 +1,16 @@
+{
+  "name": "PandoRdio",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "description": "Pandora -> Rdio",
+  "background": {
+    "page": "background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["http://www.pandora.com/*"],
+      "css": ["styles.css"],
+      "js": ["jquery.js", "script.js"]
+    }
+  ]
+}
