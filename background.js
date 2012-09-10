@@ -1,9 +1,15 @@
+var showNotification = function(title, text) {
+  var notification = webkitNotifications.createNotification(
+    'icon48.png',
+    title,
+    text
+  );
+  notification.show();
+};
+
 var searchHandler = function(trackData, searchResults, response) {
   if(searchResults.length < 1) {
-    return response({
-      result: 'matchError',
-      errorMessage: 'No match found in Rdio.'
-    });
+    return showNotification('No Match Found', 'No match found in Rdio.');
   }
 
   var match = _.find(searchResults, function(t) {
@@ -12,10 +18,7 @@ var searchHandler = function(trackData, searchResults, response) {
   });
 
   if(!match) {
-    return response({
-      result: 'matchError',
-      errorMessage: 'Match found in Rdio, but no exact match.'
-    });
+    return showNotification('No Exact Match Found', 'Match found in Rdio, but no exact match.');
   }
 
   rdio.addToCollection(match.key, function(data) {
@@ -23,9 +26,7 @@ var searchHandler = function(trackData, searchResults, response) {
       rdio.setAvailableOffline(match.key, true, function(data) {
         // assuming if we could addToCollection, shouldn't need
         // to check data object for success here.
-        return response({
-          result: 'addedToCollection'
-        });
+        return showNotification('Added to Collection', 'The song was added to your collection in Rdio.');
       });
     } else {
       if(data.error.statusCode === 401) {

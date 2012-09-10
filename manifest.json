@@ -11,6 +11,12 @@
     "48": "icon48.png",
     "128": "icon128.png"
   },
+  "permissions": [
+    "notifications"
+  ],
+  "web_accessible_resources": [
+    "icon48.png"
+  ],
   "content_scripts": [
     {
       "matches": ["http://www.pandora.com/*"],
