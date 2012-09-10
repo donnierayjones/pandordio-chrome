@@ -1,9 +1,25 @@
 $(function() {
 
-  var handleResponse = function(res) {
-    if(!res.successful) {
+  var responseHandlers = {
+    'matchError': function(res) {
       alert(res.errorMessage);
+    },
+    'unhandledError': function(res) {
+      alert(res.errorMessage);
+    },
+    'unauthenticated': function(res) {
+      var confirmed = confirm('Allow PandoRdio to add to your Rdio collection');
+      if(confirmed) {
+        window.open('http://pandordio.herokuapp.com');
+      }
+    },
+    'addedToCollection': function(res) {
+      alert('Added to collection!');
     }
+  };
+
+  var handleResponse = function(res) {
+    responseHandlers[res.result](res);
   };
 
   var pandoRdio = {
