@@ -13,8 +13,9 @@ var searchHandler = function(trackData, searchResults, response) {
   }
 
   var match = _.find(searchResults, function(t) {
-    return t.name.toLowerCase().indexOf(trackData.track.toLowerCase()) >= 0 &&
-    t.artist.toLowerCase().indexOf(trackData.artist.toLowerCase()) >= 0;
+    return t.type === 't' &&
+      t.name.toLowerCase().indexOf(trackData.track.toLowerCase()) >= 0 &&
+      t.artist.toLowerCase().indexOf(trackData.artist.toLowerCase()) >= 0;
   });
 
   if(!match) {
@@ -26,7 +27,10 @@ var searchHandler = function(trackData, searchResults, response) {
       rdio.setAvailableOffline(match.key, true, function(data) {
         // assuming if we could addToCollection, shouldn't need
         // to check data object for success here.
-        return showNotification('Added to Collection', 'The song was added to your collection in Rdio.');
+        var desc = '';
+        return showNotification(
+          'Added to Collection',
+          match.name + ' by ' + match.artist + ' was added to your collection in Rdio.');
       });
     } else {
       if(data.error.statusCode === 401) {
