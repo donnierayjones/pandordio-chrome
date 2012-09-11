@@ -4,7 +4,7 @@ $(function() {
     'unauthenticated': function(res) {
       var confirmed = confirm('Allow PandoRdio to add to your Rdio collection');
       if(confirmed) {
-        window.open('http://pandordio.herokuapp.com');
+        window.open('https://pandordio.herokuapp.com');
       }
     }
   };
