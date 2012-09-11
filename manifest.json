@@ -2,7 +2,7 @@
   "name": "PandoRdio",
   "version": "0.0.1",
   "manifest_version": 2,
-  "description": "Pandora -> Rdio",
+  "description": "A Thumbs Up in Pandora adds the song to your Rdio Collection.",
   "background": {
     "page": "background.html"
   },
