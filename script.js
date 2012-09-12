@@ -35,9 +35,7 @@ $(function() {
   });
 
   $('.slidesForeground').on('click', '.thumbUp a', function() {
-    var $slides = $('.stationSlides .slide');
-    var $thisSlide = $(this).closest('.slide');
-    $thisSlide.click();
+    $(this).closest('.slide').click();
     setTimeout(pandoRdio.sendTrackDataToBackground, 2000);
   });
 });
