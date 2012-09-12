@@ -29,8 +29,8 @@ var searchHandler = function(trackData, searchResults, response) {
         // to check data object for success here.
         var desc = '';
         return showNotification(
-          'Added to Collection',
-          match.name + ' by ' + match.artist + ' was added to your collection in Rdio.');
+          "Added '" + match.name + "'",
+          'by ' + match.artist + ' to your collection in Rdio.');
       });
     } else {
       if(data.error.statusCode === 401) {

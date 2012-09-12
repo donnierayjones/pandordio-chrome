@@ -14,7 +14,6 @@ $(function() {
   };
 
   var pandoRdio = {
-
     getTrackData: function() {
       return {
         artist: $('.artistSummary').text(),
@@ -26,7 +25,7 @@ $(function() {
     sendTrackDataToBackground: function() {
       chrome.extension.sendRequest({
         action: 'thumbsUp',
-        trackData: this.getTrackData()
+        trackData: pandoRdio.getTrackData()
       }, handleResponse);
     }
   };
@@ -35,4 +34,10 @@ $(function() {
     pandoRdio.sendTrackDataToBackground();
   });
 
+  $('.slidesForeground').on('click', '.thumbUp a', function() {
+    var $slides = $('.stationSlides .slide');
+    var $thisSlide = $(this).closest('.slide');
+    $thisSlide.click();
+    setTimeout(pandoRdio.sendTrackDataToBackground, 2000);
+  });
 });
