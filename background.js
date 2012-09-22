@@ -24,6 +24,25 @@ var searchHandler = function(trackData, searchResults, response) {
 
   rdio.addToCollection(match.key, function(data) {
     if(data.result === true) {
+      var playlistName = 'Pandora';
+
+      rdio.getPlaylists(function(playlistsData) {
+        var pandoraPlaylist = _.find(playlistsData.result.owned, function(playlist) {
+          return playlist.name === playlistName;
+        });
+        if(pandoraPlaylist === undefined) {
+          rdio.createPlaylist({
+            name: playlistName,
+            description: 'Playlist automatically created by PandoRdio Chrome Extension',
+            tracks: match.key
+          });
+        }
+        else {
+          rdio.addToPlaylist(pandoraPlaylist.key, match.key, function(addToPlaylistData) {
+          });
+        }
+      });
+
       rdio.setAvailableOffline(match.key, true, function(data) {
         // assuming if we could addToCollection, shouldn't need
         // to check data object for success here.
