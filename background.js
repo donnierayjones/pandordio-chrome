@@ -10,6 +10,9 @@
       text
     );
     notification.show();
+    setTimeout(function() {
+      notification.cancel();
+    }, 10000);
   };
 
   var createPlaylistWithTrack = function(trackKey) {
