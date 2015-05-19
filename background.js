@@ -4,15 +4,16 @@
   var playlistKey;
 
   var showNotification = function(title, text) {
-    var notification = webkitNotifications.createNotification(
-      'icon48.png',
-      title,
-      text
-    );
-    notification.show();
-    setTimeout(function() {
-      notification.cancel();
-    }, 10000);
+    var notification = chrome.notifications.create('',{
+      iconUrl: 'icon48.png',
+      type: 'basic',
+      title: title,
+      message: text
+    }, function(id) {
+      setTimeout(function() {
+        chrome.notifications.clear(id);
+      }, 10000);
+    });
   };
 
   var createPlaylistWithTrack = function(trackKey) {

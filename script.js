@@ -16,9 +16,9 @@ $(function() {
   var pandoRdio = {
     getTrackData: function() {
       return {
-        artist: $('.artistSummary').text(),
-        track: $('.songTitle').text(),
-        album: $('.albumTitle').text()
+        artist: $('.artistSummary:first').text(),
+        track: $('.songTitle:first').text(),
+        album: $('.albumTitle:first').text()
       };
     },
 
